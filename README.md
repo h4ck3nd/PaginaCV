@@ -4,7 +4,7 @@ Bienvenido/a a mi CV online. Este sitio web es una versión interactiva y modern
 
 ## 🌐 Enlace al sitio
 
-Puedes verlo en línea aquí: [Ir al sitio](https://tu-usuario.github.io/mi-cv)  
+Puedes verlo en línea aquí: [Ir al sitio](https://h4ck3nd.github.io/PaginaCV/)  
 
 ## 🛠️ Tecnologías utilizadas
 
