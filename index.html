@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina CV | Principal</title>
+    <link rel="icon" href="cv.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0a0a0a;
+            background-image: 
+                linear-gradient(rgba(50, 50, 50, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(50, 50, 50, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #e5e7eb;
+            scroll-behavior: smooth;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+        }
+        
+        .section-card {
+            background: linear-gradient(145deg, #1a1a1a, #111111);
+            border: 1px solid #2d3748;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: #3b82f6;
+        }
+        
+        .skill-pill {
+            background: linear-gradient(90deg, #1e40af, #1e3a8a);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #3b82f6;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .contact-link:hover {
+            color: #3b82f6;
+            transform: translateX(5px);
+        }
+        
+        .hexagon {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        
+        .typewriter {
+            border-right: 3px solid #3b82f6;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3b82f6; }
+        }
+
+        /* Custom cursor styles */
+        .cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #d1d5db;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            mix-blend-mode: difference;
+            transition: transform 0.4s ease, background-color 0.2s ease;
+        }
+
+        .cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            border-color: #3b82f6;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        body {
+            cursor: none;
+        }
+
+        /* Remove pointer cursor from links */
+        a, button {
+            cursor: none !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row items-center justify-between mb-12">
+            <div class="flex items-center mb-6 md:mb-0">
+                <div class="hexagon bg-gradient-to-br from-blue-600 to-blue-800 w-24 h-24 flex items-center justify-center mr-6">
+                    <span class="text-3xl font-bold">AG</span>
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-1 glow-text">Adrián García López</h1>
+                    <div class="typewriter text-xl text-blue-400 font-mono" id="typewriter"></div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4">
+                <a href="https://github.com/D1se0" target="_blank" class="bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://d1se0.github.io/hackerlabs" target="_blank" class="bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fas fa-blog text-2xl"></i>
+                </a>
+                <a href="https://dise0.gitbook.io/h4cker_b00k" target="_blank" class="bg-gray-800 hover:bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fas fa-book text-2xl"></i>
+                </a>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-1 space-y-8">
+                <!-- Contact Section -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-id-card mr-2 text-blue-400"></i> Contacto
+                    </h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-center contact-link transition-all duration-300">
+                            <i class="fas fa-envelope mr-3 text-blue-400 w-5"></i>
+                            <a href="mailto:ciberseguridad12345@gmail.com" class="hover:underline">ciberseguridad12345@gmail.com</a>
+                        </li>
+                        <li class="flex items-center contact-link transition-all duration-300">
+                            <i class="fas fa-phone mr-3 text-blue-400 w-5"></i>
+                            <span>+34 685 459 231</span>
+                        </li>
+                        <li class="flex items-center contact-link transition-all duration-300">
+                            <i class="fab fa-github mr-3 text-blue-400 w-5"></i>
+                            <a href="https://github.com/D1se0" target="_blank" class="hover:underline">github.com/D1se0</a>
+                        </li>
+                        <li class="flex items-center contact-link transition-all duration-300">
+                            <i class="fas fa-globe mr-3 text-blue-400 w-5"></i>
+                            <a href="https://d1se0.github.io/hackerlabs" target="_blank" class="hover:underline">hackerlabs</a>
+                        </li>
+                        <li class="flex items-center contact-link transition-all duration-300">
+                            <i class="fas fa-book mr-3 text-blue-400 w-5"></i>
+                            <a href="https://dise0.gitbook.io/h4cker_b00k" target="_blank" class="hover:underline">H4cker_B00k</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-code mr-2 text-blue-400"></i> Habilidades
+                    </h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Blue Team</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Red Team</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Análisis Forense</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Criptología</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Hacking Ético</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Pentesting</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Linux</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Windows</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Redes</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Seguridad IT</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Office</span>
+                        <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <!-- Certifications Section -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-certificate mr-2 text-blue-400"></i> Certificaciones
+                    </h2>
+                    <div class="flex items-center">
+                        <div class="bg-blue-900/50 p-3 rounded-lg mr-4">
+                            <i class="fas fa-shield-alt text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">eJPT – Junior Penetration Tester</h3>
+                            <p class="text-sm text-gray-400">INE Security</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-trophy mr-2 text-blue-400"></i> Logros
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-2 rounded-lg mr-3">
+                                <i class="fas fa-medal text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Certificación eJPT</h3>
+                                <p class="text-sm text-gray-400">Junior Penetration Tester</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-2 rounded-lg mr-3">
+                                <i class="fas fa-star text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">100+ Máquinas Hackeadas</h3>
+                                <p class="text-sm text-gray-400">CTFs y laboratorios</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-2 rounded-lg mr-3">
+                                <i class="fas fa-code text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium">Creador de Contenido</h3>
+                                <p class="text-sm text-gray-400">Tutoriales y laboratorios</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-language mr-2 text-blue-400"></i> Idiomas
+                    </h2>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Español</span>
+                                <span class="text-blue-400">Nativo</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Inglés</span>
+                                <span class="text-blue-400">B1</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Projects -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-laptop-code mr-2 text-blue-400"></i> Proyectos
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-medium flex items-center">
+                                <i class="fas fa-book mr-2 text-blue-400"></i> H4cker_B00k
+                            </h3>
+                            <p class="text-sm text-gray-400">Wiki técnica con metodologías y técnicas</p>
+                        </div>
+                        <div>
+                            <h3 class="font-medium flex items-center">
+                                <i class="fas fa-flask mr-2 text-blue-400"></i> HackerLabs
+                            </h3>
+                            <p class="text-sm text-gray-400">Laboratorios de seguridad ofensiva</p>
+                        </div>
+                        <div>
+                            <h3 class="font-medium flex items-center">
+                                <i class="fab fa-youtube mr-2 text-blue-400"></i> Hacking_Community
+                            </h3>
+                            <p class="text-sm text-gray-400">Contenido educativo en YouTube</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Info -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-info-circle mr-2 text-blue-400"></i> Otros datos
+                    </h2>
+                    <div class="flex items-center">
+                        <i class="fas fa-car mr-3 text-blue-400"></i>
+                        <span>Permiso de conducir tipo B</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Professional Profile -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-user-tie mr-2 text-blue-400"></i> Perfil Profesional
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed">
+                        Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Con enfoque en hacking ético y protección de sistemas. Comprometido con el aprendizaje continuo y la aplicación de las mejores prácticas de seguridad para garantizar la integridad de los sistemas y datos.
+                    </p>
+                </div>
+
+                <!-- Value Proposition for Companies -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-building mr-2 text-blue-400"></i> Valor para Empresas
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Why Hire -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 text-blue-400">
+                                 🏢 ¿Por qué contratarme?
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Perfil técnico integral con base sólida en seguridad ofensiva y conocimientos prácticos en sistemas y redes. Combino experiencia en entornos SOC con formación autodidacta en hacking ético, manteniéndome actualizado en nuevas técnicas y herramientas. Capaz de integrarme en equipos Red Team, Blue Team o híbridos, aportando valor desde el primer día.
+                            </p>
+                        </div>
+                        
+                        <!-- Key Knowledge -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 text-blue-400">
+                                 🔐 Conocimientos clave para empresas
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                                    <li>Seguridad en sistemas Windows/Active Directory</li>
+                                    <li>Enumeración avanzada (Kerberos, SMB, LDAP)</li>
+                                    <li>Abuso de vulnerabilidades corporativas</li>
+                                    <li>Escalada de privilegios y post-explotación</li>
+                                </ul>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                                    <li>Detección y evasión de EDR/AV</li>
+                                    <li>Gestión segura de infraestructuras TI</li>
+                                    <li>Automatización con scripting (Bash/PowerShell)</li>
+                                    <li>Virtualización y contenedores Docker</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Tools Stack -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 text-blue-400">
+                                 🛠️ Stack de herramientas
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Kali Linux</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Burp Suite</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Metasploit</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Nmap</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">BloodHound</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">CrackMapExec</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Impacket</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Docker</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Proxmox</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Palo Alto</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">PowerShell</span>
+                                <span class="skill-pill px-3 py-1 rounded-full text-sm font-medium">Git</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Professional Attitude -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 text-blue-400">
+                                 💡 Actitud profesional
+                            </h3>
+                            <div class="bg-gray-800/50 p-4 rounded-lg">
+                                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                                    <li><strong>Proactivo y resolutivo:</strong> Capacidad para trabajar de forma autónoma y resolver problemas complejos</li>
+                                    <li><strong>Trabajo en equipo:</strong> Habilidad para colaborar efectivamente en equipos técnicos</li>
+                                    <li><strong>Comunicación clara:</strong> Documentación técnica precisa y capacidad para explicar conceptos complejos</li>
+                                    <li><strong>Mejora continua:</strong> Compromiso con el aprendizaje permanente en un sector en constante evolución</li>
+                                    <li><strong>Ética profesional:</strong> Estricto cumplimiento de estándares éticos en seguridad informática</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offensive Security Profile -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-terminal mr-2 text-red-400"></i> Perfil en Seguridad Ofensiva
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Passion -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center text-red-400">
+                                <i class="fas fa-bolt mr-2"></i> Pasión por la Ciberseguridad
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Entusiasta incansable del mundo de la ciberseguridad, especializado en Hacking Ético y técnicas ofensivas. Autodidacta por naturaleza, exploro constantemente nuevas herramientas, vectores de ataque, metodologías y vulnerabilidades, manteniéndome siempre al día con la evolución del sector.
+                            </p>
+                        </div>
+                        
+                        <!-- Experience -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center text-red-400">
+                                <i class="fas fa-bug mr-2"></i> Experiencia en Hacking Ético y Red Team
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                                <li>Pruebas de penetración (pentesting) avanzadas en entornos personales y colaborativos</li>
+                                <li>Especializado en resolución de CTFs (Dockerlabs, Vulnyx, HackMyVM, VulnHub, Hack The Box)</li>
+                                <li>Creador de laboratorios y retos de CTF para comunidades de hacking</li>
+                                <li>Fuerte conocimiento en explotación de vulnerabilidades, escalada de privilegios y post-explotación</li>
+                                <li>Reconocimiento avanzado, análisis de tráfico y evasión de AV/EDR</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Technical Profile -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center text-red-400">
+                                <i class="fas fa-server mr-2"></i> Perfil Técnico Avanzado
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <h4 class="font-medium mb-2 flex items-center">
+                                        <i class="fas fa-shield-alt mr-2 text-blue-400"></i> SysAdmin & DevSecOps
+                                    </h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>Infraestructura y administración de sistemas</li>
+                                        <li>Entornos seguros en Linux y Docker</li>
+                                        <li>Redes segmentadas y firewalls</li>
+                                        <li>Automatización de laboratorios</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <h4 class="font-medium mb-2 flex items-center">
+                                        <i class="fas fa-code mr-2 text-blue-400"></i> Tecnologías
+                                    </h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>Linux, bash scripting</li>
+                                        <li>Redes TCP/IP y protocolos</li>
+                                        <li>Virtualización (Proxmox, VMware)</li>
+                                        <li>Herramientas de pentesting</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Content Creation -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center text-red-400">
+                                <i class="fab fa-youtube mr-2"></i> Creador de Contenido Técnico
+                            </h3>
+                            <div class="flex items-start">
+                                <div class="bg-red-900/50 p-3 rounded-lg mr-4">
+                                    <i class="fab fa-youtube text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <a href="https://www.youtube.com/@Hacking_Community" target="_blank" class="font-semibold hover:underline">Hacking_Community</a>
+                                    <p class="text-sm text-gray-400 mt-1">
+                                        Canal educativo sobre seguridad ofensiva, pentesting, resolución de CTFs y herramientas profesionales (Burp Suite, Nmap, Metasploit). Comprometido con la formación de futuros profesionales del sector.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Philosophy -->
+                        <div>
+                            <h3 class="font-bold text-lg mb-2 flex items-center text-red-400">
+                                <i class="fas fa-brain mr-2"></i> Mentalidad y Filosofía
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Siempre activo en la comunidad, comprometido con el aprendizaje continuo y el crecimiento profesional. Creo firmemente en compartir conocimiento, colaborar y mantener una actitud ética y profesional dentro del hacking. La ciberseguridad no es solo mi trabajo, es mi pasión.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-briefcase mr-2 text-blue-400"></i> Experiencia Laboral
+                    </h2>
+                    <div class="space-y-6 relative border-l border-gray-700 pl-6">
+                        <!-- Job 1 -->
+                        <div class="relative timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="bg-gray-800/50 p-4 rounded-lg">
+                                <div class="flex justify-between items-start flex-col sm:flex-row">
+                                    <h3 class="font-bold text-lg">Técnico de Ciberseguridad (SOC)</h3>
+                                    <span class="text-blue-400 text-sm mt-1 sm:mt-0">2024</span>
+                                </div>
+                                <p class="text-blue-400 font-medium mb-2">UNITEL CIBERSEGURIDAD</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li>Monitoreo de IPs y detección de amenazas</li>
+                                    <li>Análisis de campañas de phishing</li>
+                                    <li>Configuración de firewalls (Palo Alto)</li>
+                                    <li>Gestión y protección de redes</li>
+                                    <li>Respuesta ante incidentes de seguridad</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Job 2 -->
+                        <div class="relative timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="bg-gray-800/50 p-4 rounded-lg">
+                                <div class="flex justify-between items-start flex-col sm:flex-row">
+                                    <h3 class="font-bold text-lg">Oficial Administrativo</h3>
+                                    <span class="text-blue-400 text-sm mt-1 sm:mt-0">2023</span>
+                                </div>
+                                <p class="text-blue-400 font-medium mb-2">Poligón & Naturalia</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li>Soporte técnico a usuarios</li>
+                                    <li>Gestión y mantenimiento de redes</li>
+                                    <li>Control de calidad de sistemas</li>
+                                    <li>Mantenimiento de impresoras y hardware</li>
+                                    <li>Solución de problemas técnicos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Job 3 -->
+                        <div class="relative timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="bg-gray-800/50 p-4 rounded-lg">
+                                <div class="flex justify-between items-start flex-col sm:flex-row">
+                                    <h3 class="font-bold text-lg">Técnico Informático</h3>
+                                    <span class="text-blue-400 text-sm mt-1 sm:mt-0">2023</span>
+                                </div>
+                                <p class="text-blue-400 font-medium mb-2">MundoPixel</p>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li>Reparaciones de hardware y software</li>
+                                    <li>Diseño gráfico y maquetación</li>
+                                    <li>Programación web básica</li>
+                                    <li>Gestión de redes sociales</li>
+                                    <li>Soporte técnico integral</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section-card p-6 rounded-xl">
+                    <h2 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-graduation-cap mr-2 text-blue-400"></i> Educación
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-3 rounded-lg mr-4 mt-1">
+                                <i class="fas fa-shield-halved text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">Certificado de Seguridad Informática</h3>
+                                <p class="text-blue-400">Unitel Sistemas</p>
+                                <p class="text-sm text-gray-400">2023–2024</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-3 rounded-lg mr-4 mt-1">
+                                <i class="fas fa-network-wired text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">CFGM Sistemas Microinformáticos y Redes</h3>
+                                <p class="text-blue-400">IES Las Salinas</p>
+                                <p class="text-sm text-gray-400">2021–2023</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-900/50 p-3 rounded-lg mr-4 mt-1">
+                                <i class="fas fa-laptop-code text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold">FPB Informática de Oficina</h3>
+                                <p class="text-blue-400">IES Las Salinas</p>
+                                <p class="text-sm text-gray-400">2019–2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 pt-6 border-t border-gray-800 text-center text-gray-400 text-sm">
+            <p>© 2024 Adrián García López - Técnico en Ciberseguridad</p>
+            <p class="mt-1">Desarrollado con <i class="fas fa-heart text-red-500"></i> y código seguro</p>
+        </footer>
+    </div>
+
+    <script>
+        // Typewriter effect
+        const typewriterTexts = [
+            "Técnico en Ciberseguridad",
+            "Blue Team Specialist",
+            "Ethical Hacker",
+            "SOC Analyst"
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isEnd = false;
+        
+        function typeWriter() {
+            const element = document.getElementById('typewriter');
+            const currentText = typewriterTexts[textIndex];
+            
+            if (isDeleting) {
+                element.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                element.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                isEnd = true;
+                setTimeout(typeWriter, 2000);
+                return;
+            }
+            
+            if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex++;
+                if (textIndex >= typewriterTexts.length) {
+                    textIndex = 0;
+                }
+            }
+            
+            if (isEnd) {
+                isDeleting = true;
+                isEnd = false;
+                setTimeout(typeWriter, 100);
+            } else {
+                const speed = isDeleting ? 50 : 100;
+                setTimeout(typeWriter, speed);
+            }
+        }
+        
+        // Start the typewriter effect
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWriter, 1000);
+            
+            // Add animation to section cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.section-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+    <script>
+        // Custom cursor
+        const cursor = document.createElement('div');
+        cursor.classList.add('cursor');
+        document.body.appendChild(cursor);
+
+        const cursorFollower = document.createElement('div');
+        cursorFollower.classList.add('cursor-follower');
+        document.body.appendChild(cursorFollower);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+            
+            setTimeout(() => {
+                cursorFollower.style.left = `${e.clientX}px`;
+                cursorFollower.style.top = `${e.clientY}px`;
+            }, 100);
+        });
+
+        // Add active state when hovering clickable elements
+        const clickableElements = document.querySelectorAll('a, button, .section-card, .skill-pill');
+        clickableElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
