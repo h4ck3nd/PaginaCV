@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-color: rgba(43, 230, 164, 0.35) transparent;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-void-950 text-slate-200 font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 15% -10%, rgba(43,230,164,0.09), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 100% 0%, rgba(43,180,255,0.08), transparent 60%),
+      linear-gradient(rgba(95,208,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(95,208,255,0.05) 1px, transparent 1px);
+    background-size: auto, auto, 34px 34px, 34px 34px;
+  }
+  ::selection {
+    background: rgba(43, 230, 164, 0.35);
+    color: #04070a;
+  }
+  :focus-visible {
+    outline: 2px solid #2be6a4;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #2be6a4, #2bb4ff);
+    border-radius: 8px;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply relative bg-white/[0.035] border border-white/[0.08] backdrop-blur-xl;
+  }
+  .glass-panel {
+    @apply glass rounded-2xl shadow-glass;
+  }
+  .glass-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(43,230,164,0.35), transparent 35%, transparent 65%, rgba(43,180,255,0.25));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-[0.32em] uppercase text-signal-500/80;
+  }
+  .section-heading {
+    @apply font-display font-bold text-2xl sm:text-3xl text-white tracking-tight;
+  }
+  .chip {
+    @apply font-mono text-[11px] uppercase tracking-wider px-2.5 py-1 rounded-md border border-white/10 bg-white/[0.04] text-slate-300;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm font-semibold bg-signal-500 text-void-950 hover:bg-signal-400 transition-colors shadow-[0_0_24px_rgba(43,230,164,0.35)];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-mono text-sm font-semibold border border-white/15 text-slate-200 hover:border-signal-500/60 hover:text-signal-400 transition-colors;
+  }
+  .scanline {
+    @apply pointer-events-none absolute inset-x-0 h-24 bg-gradient-to-b from-transparent via-signal-400/10 to-transparent;
+  }
+  .terminal-caret {
+    @apply inline-block w-[9px] h-[1.1em] align-middle bg-signal-400 ml-1 animate-blink;
+  }
+  .link-dotted {
+    @apply underline decoration-dotted decoration-white/30 underline-offset-4 hover:decoration-signal-400 hover:text-signal-400 transition-colors;
+  }
+}
