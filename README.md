@@ -7,8 +7,15 @@ con un servidor **Node.js/Express** opcional para autoalojarlo.
 Diseño "hacker glass": glassmorphism, blur, acentos terminal (verde/cian sobre
 fondo casi negro), tipografía monoespaciada (JetBrains Mono) + Sora, animaciones
 con `framer-motion`, y una pieza central: un **mapa de topología de red interactivo**
-de tu infraestructura real (Raspberry Pi 4, Proxmox VE con 10 LXC, Oracle Cloud,
-WireGuard VPN).
+con cables animados (pulsos de luz viajando en tiempo real) de tu infraestructura
+real — Oracle Cloud como nodo central en la nube (servidor WireGuard), con
+Proxmox VE y Raspberry Pi 4 como spokes conectados. Cada servicio es clicable
+y abre una ficha técnica detallada (stack, arquitectura, highlights).
+
+Incluye también: badge en vivo de HackTheBox (actualizado automáticamente por
+HTB, sin necesidad de API key), tarjeta de DockerLabs, CVE-2026-19871
+destacado, y un listado de bug bounty paginado ("ver más") filtrable por
+severidad.
 
 ## Estructura
 
@@ -29,6 +36,12 @@ portfolio/
 Todo el texto (experiencia, skills, hallazgos de bug bounty, servicios del
 homelab, proyectos...) vive en **`src/data/content.js`**. No hace falta tocar
 ningún componente para actualizar datos: añade/edita objetos en ese fichero.
+
+Las fichas técnicas detalladas de cada servicio (las que se abren al hacer
+clic sobre un servicio en la sección Homelab) están en el objeto
+`serviceDetails` del mismo fichero, indexadas por el nombre exacto del
+servicio tal y como aparece en `homelab.hub.services` / `homelab.spokes[].services`
+/ `homelab.spokes[].lxc`.
 
 > ⚠️ **Nota sobre bug bounty**: por responsabilidad en la divulgación, el
 > listado público solo muestra tipo de vulnerabilidad, severidad y estado —
@@ -58,7 +71,7 @@ npm run preview     # sirve /dist en local para comprobarlo
 ### Opción A — GitHub Actions (recomendada, despliegue automático)
 
 Ya incluye el workflow `.github/workflows/deploy.yml`: cada `git push` a
-`main` construye y publica solo.
+`v2` construye y publica solo.
 
 1. Sustituye el contenido de tu repo `PaginaCV` por este proyecto (conservando
    la carpeta `.git`):
@@ -68,7 +81,7 @@ Ya incluye el workflow `.github/workflows/deploy.yml`: cada `git push` a
    # copia aquí dentro TODOS los archivos de este zip, incluida .github/
    git add .
    git commit -m "Migración a React + Vite + Node"
-   git push origin main
+   git push origin v2
    ```
 2. En GitHub → tu repo → **Settings → Pages → Build and deployment → Source**:
    selecciona **GitHub Actions** (no "Deploy from a branch").
@@ -76,7 +89,7 @@ Ya incluye el workflow `.github/workflows/deploy.yml`: cada `git push` a
    "Deploy to GitHub Pages" termine (icono verde ✅).
 4. Tu portfolio estará en `https://h4ck3nd.github.io/PaginaCV/`.
 
-A partir de aquí, cada vez que hagas `git push` a `main` se despliega solo.
+A partir de aquí, cada vez que hagas `git push` a `v2` se despliega solo.
 
 ### Opción B — manual con el paquete `gh-pages`
 
@@ -113,6 +126,35 @@ de `*.diseo.duckdns.org`, igual que el resto de tus servicios.
 Para recibir los mensajes del formulario de verdad, conecta en
 `server/index.js` (función `/api/contact`) tu proveedor de email preferido
 (nodemailer + SMTP, Resend, o incluso un webhook a tu **n8n**).
+
+### Estadísticas de HackTheBox en tiempo real
+
+El sitio muestra tus stats de HTB (rango, puntos, ranking, owns...) de dos
+formas, con fallback automático:
+
+1. **Modo en vivo (requiere el servidor Node corriendo):** el frontend
+   consulta `/api/htb-stats`, que a su vez llama server-side a la API real
+   de HackTheBox (`labs.hackthebox.com/api/v4/user/profile/basic/{id}`) con
+   tu App Token, cacheando la respuesta 5 minutos. El token **nunca** llega
+   al navegador.
+2. **Modo estático (GitHub Pages, sin backend):** si `/api/htb-stats` no
+   responde JSON (404 de GitHub Pages), el frontend cae automáticamente al
+   **badge oficial de HTB** (`hackthebox.com/badge/image/{id}`), una imagen
+   que HTB genera dinámicamente y que ya refleja tus stats reales sin
+   necesidad de ninguna clave.
+
+Para activar el modo en vivo:
+
+```bash
+cp .env.example .env
+# Ve a https://app.hackthebox.com → Settings → App Tokens → genera uno
+# y pégalo en .env como HTB_APP_TOKEN=...
+npm run serve
+```
+
+Si despliegas en un LXC de tu Proxmox con systemd, define `HTB_APP_TOKEN`
+como variable de entorno del servicio (no la subas nunca a git — `.env`
+ya está en `.gitignore`).
 
 ## Stack técnico
 

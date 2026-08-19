@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Section, { Reveal } from './Section'
 import { bbPlatforms, bugBounty, statusMeta, severityOrder } from '../data/content'
-import { ShieldAlert, Info, ExternalLink } from 'lucide-react'
+import { ShieldAlert, Info, ExternalLink, ChevronDown } from 'lucide-react'
 
 const sevColor = {
   Critical: '#ff5468',
@@ -10,8 +10,11 @@ const sevColor = {
   Low: '#2be6a4',
 }
 
+const PAGE_SIZE = 8
+
 export default function BugBounty() {
   const [filter, setFilter] = useState('All')
+  const [visible, setVisible] = useState(PAGE_SIZE)
 
   const counts = useMemo(() => {
     const c = { All: bugBounty.length }
@@ -19,12 +22,20 @@ export default function BugBounty() {
     return c
   }, [])
 
-  const list = useMemo(() => {
+  const sorted = useMemo(() => {
     const filtered = filter === 'All' ? bugBounty : bugBounty.filter((b) => b.severity === filter)
     return [...filtered].sort(
       (a, b) => severityOrder.indexOf(a.severity) - severityOrder.indexOf(b.severity) || new Date(b.date) - new Date(a.date)
     )
   }, [filter])
+
+  const list = sorted.slice(0, visible)
+  const hasMore = visible < sorted.length
+
+  function handleFilter(s) {
+    setFilter(s)
+    setVisible(PAGE_SIZE)
+  }
 
   return (
     <Section
@@ -65,7 +76,7 @@ export default function BugBounty() {
         {['All', ...severityOrder].map((s) => (
           <button
             key={s}
-            onClick={() => setFilter(s)}
+            onClick={() => handleFilter(s)}
             className={`font-mono text-xs px-3 py-1.5 rounded-full border transition-colors ${
               filter === s
                 ? 'border-signal-400 text-signal-300 bg-signal-400/10'
@@ -112,6 +123,24 @@ export default function BugBounty() {
           )
         })}
       </div>
+
+      {hasMore && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setVisible((v) => v + PAGE_SIZE)}
+            className="btn-ghost"
+          >
+            Ver más ({sorted.length - visible} restantes) <ChevronDown size={15} />
+          </button>
+        </div>
+      )}
+      {!hasMore && sorted.length > PAGE_SIZE && (
+        <div className="flex justify-center mt-6">
+          <button onClick={() => setVisible(PAGE_SIZE)} className="btn-ghost">
+            Ver menos
+          </button>
+        </div>
+      )}
     </Section>
   )
 }
