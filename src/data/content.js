@@ -17,7 +17,7 @@ export const profile = {
   email: 'ciberseguridad12345@gmail.com',
   phone: '+34 685 459 231',
   summary:
-    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con un CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
+    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con 2 CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
   social: {
     github: 'https://github.com/D1se0',
     hackerlabs: 'https://d1se0.github.io/hackerlabs',
@@ -39,7 +39,7 @@ export const dockerlabs = {
 }
 
 export const stats = [
-  { label: 'CVE en posesión', value: '1' },
+  { label: 'CVE en posesión', value: '2' },
   { label: 'Vulnerabilidades reportadas', value: '25+' },
   { label: 'Máquinas hackeadas', value: '400+' },
   { label: 'Auditorías realizadas', value: '39' },
@@ -188,20 +188,36 @@ export const education = [
   },
 ]
 
-// ── CVE ──────────────────────────────────────────────────────────────────
-export const cve = {
-  id: 'CVE-2026-19871',
-  title: 'Hardcoded Credentials in Prospero Flow CRM — Employee Onboarding',
-  description:
-    'Vulnerabilidad de credenciales embebidas ("changeme") en el flujo de alta de empleados del módulo RRHH de Prospero Flow CRM. Cada cuenta creada por el formulario de onboarding recibía una contraseña fija y predecible sin ningún mecanismo de notificación o cambio forzado, permitiendo el acceso completo a cualquier cuenta de empleado recién creada conociendo únicamente su email.',
-  cwe: 'CWE-798 — Use of Hard-coded Credentials',
-  severity: 'Critical',
-  cvss: '9.3',
-  links: [
-    { label: 'CVE.org — Registro oficial', url: 'https://www.cve.org/CVERecord?id=CVE-2026-19871' },
-    { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-19871-hardcoded-credentials-in-prospero-flow-crm-employee-onboarding' },
-  ],
-}
+// ── CVEs ─────────────────────────────────────────────────────────────────
+export const cves = [
+  {
+    id: 'CVE-2026-19871',
+    title: 'Hardcoded Credentials in Prospero Flow CRM — Employee Onboarding',
+    description:
+      'Vulnerabilidad de credenciales embebidas ("changeme") en el flujo de alta de empleados del módulo RRHH de Prospero Flow CRM. Cada cuenta creada por el formulario de onboarding recibía una contraseña fija y predecible sin ningún mecanismo de notificación o cambio forzado, permitiendo el acceso completo a cualquier cuenta de empleado recién creada conociendo únicamente su email.',
+    cwe: 'CWE-798 — Use of Hard-coded Credentials',
+    severity: 'Critical',
+    cvss: '9.3',
+    links: [
+      { label: 'CVE.org — Registro oficial', url: 'https://www.cve.org/CVERecord?id=CVE-2026-19871' },
+      { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-19871-hardcoded-credentials-in-prospero-flow-crm-employee-onboarding' },
+    ],
+  },
+  {
+    id: 'CVE-2026-77780',
+    title: 'IDOR en claves foráneas de banco — Prospero Flow CRM Transaction Save',
+    description:
+      'Bypass de autorización por clave controlada por el usuario (CWE-639) en el endpoint de guardado de transacciones de Prospero Flow CRM. Los campos bank_account_id y bank_card_id solo se validaban como enteros, sin comprobar que pertenecieran a la empresa del usuario autenticado — la restricción existía únicamente en el desplegable del formulario, no en el servidor. Al listar la contabilidad, la aplicación resuelve esas relaciones sin scoping de empresa y muestra el nombre de la cuenta, el banco y los últimos cuatro dígitos de la tarjeta de otro tenant, permitiendo enumerar identificadores bancarios de cualquier empresa alojada en la misma instancia sin ninguna interacción de la víctima.',
+    cwe: 'CWE-639 — Authorization Bypass Through User-Controlled Key',
+    severity: 'Medium',
+    cvss: '5.3',
+    cvssVector: 'CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N',
+    links: [
+      { label: 'CVE.org — Registro oficial', url: 'https://www.cve.org/CVERecord?id=CVE-2026-77780' },
+      { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-77780-idor-unvalidated-bank-foreign-keys-prospero-transaction-save' },
+    ],
+  },
+]
 
 // ── Bug Bounty ───────────────────────────────────────────────────────────
 // Nota de responsabilidad: por ético profesional, este portfolio NO expone
@@ -339,6 +355,7 @@ export const bugBounty = [
     cvss: 7.1,
     status: 'resolved',
     date: '2026-07-30',
+    note: 'Asignado como CVE-2026-77780',
   },
   {
     id: 'product-photo-html-extension-xss',
