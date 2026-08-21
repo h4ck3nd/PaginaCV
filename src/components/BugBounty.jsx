@@ -103,7 +103,10 @@ export default function BugBounty() {
 
                 <div className="flex-1 min-w-0">
                   <p className="text-slate-200 font-medium leading-snug">{b.title}</p>
-                  <p className="text-xs text-slate-500 mt-1">{b.program} · {b.type}</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {b.program} · {b.type}
+                    {b.note && <span className="text-signal-400"> · {b.note}</span>}
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
