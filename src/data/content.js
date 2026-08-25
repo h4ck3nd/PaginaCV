@@ -17,7 +17,7 @@ export const profile = {
   email: 'ciberseguridad12345@gmail.com',
   phone: '+34 685 459 231',
   summary:
-    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con 2 CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
+    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con 3 CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
   social: {
     github: 'https://github.com/D1se0',
     hackerlabs: 'https://d1se0.github.io/hackerlabs',
@@ -39,7 +39,7 @@ export const dockerlabs = {
 }
 
 export const stats = [
-  { label: 'CVE en posesión', value: '2' },
+  { label: 'CVE en posesión', value: '3' },
   { label: 'Vulnerabilidades reportadas', value: '25+' },
   { label: 'Máquinas hackeadas', value: '400+' },
   { label: 'Auditorías realizadas', value: '39' },
@@ -217,6 +217,20 @@ export const cves = [
       { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-77780-idor-unvalidated-bank-foreign-keys-prospero-transaction-save' },
     ],
   },
+  {
+    id: 'CVE-2026-78337',
+    title: 'Unrestricted Upload → Stored XSS vía logo SVG — Prospero Flow CRM',
+    description:
+      'Subida de archivos sin restricción (CWE-434) combinada con neutralización insuficiente de entrada (CWE-79) en el endpoint de guardado de empresa de Prospero Flow CRM. El campo logo no aplicaba ninguna validación de tipo, extensión ni tamaño, permitiendo subir un documento SVG con un elemento <script> embebido como logotipo corporativo. El archivo se sirve de forma estática fuera del enrutado de Laravel, sin middleware de autenticación, por lo que cualquier visitante —incluso no autenticado— que abra la URL del logo ejecuta JavaScript arbitrario en el origen de la aplicación.',
+    cwe: 'CWE-434 + CWE-79 — Unrestricted Upload of File with Dangerous Type / Stored XSS',
+    severity: 'Medium',
+    cvss: '4.8',
+    cvssVector: 'CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N',
+    links: [
+      { label: 'CVE.org — Registro oficial', url: 'https://www.cve.org/CVERecord?id=CVE-2026-78337' },
+      { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-78337-unrestricted-upload-company-logo-svg-xss' },
+    ],
+  },
 ]
 
 // ── Bug Bounty ───────────────────────────────────────────────────────────
@@ -315,6 +329,7 @@ export const bugBounty = [
     cvss: 8.2,
     status: 'resolved',
     date: '2026-07-18',
+    note: 'Asignado como CVE-2026-78337',
   },
   {
     id: 'stored-xss-email-module',
