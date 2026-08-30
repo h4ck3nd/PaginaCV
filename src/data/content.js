@@ -17,7 +17,7 @@ export const profile = {
   email: 'ciberseguridad12345@gmail.com',
   phone: '+34 685 459 231',
   summary:
-    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con 3 CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
+    'Apasionado por la seguridad informática con experiencia como Blue Team en entorno SOC, análisis forense, criptografía, configuración de firewalls y redes. Enfocado en hacking ético, protección de sistemas y explotación avanzada de aplicaciones web (certificado CWES por Hack The Box). Cazador de vulnerabilidades activo con 4 CVE en posesión y decenas de hallazgos reportados en programas privados y públicos.',
   social: {
     github: 'https://github.com/D1se0',
     hackerlabs: 'https://d1se0.github.io/hackerlabs',
@@ -39,7 +39,7 @@ export const dockerlabs = {
 }
 
 export const stats = [
-  { label: 'CVE en posesión', value: '3' },
+  { label: 'CVE en posesión', value: '4' },
   { label: 'Vulnerabilidades reportadas', value: '25+' },
   { label: 'Máquinas hackeadas', value: '400+' },
   { label: 'Auditorías realizadas', value: '39' },
@@ -231,6 +231,20 @@ export const cves = [
       { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-78337-unrestricted-upload-company-logo-svg-xss' },
     ],
   },
+  {
+    id: 'CVE-2026-81931',
+    title: 'Unrestricted Upload → Stored XSS vía foto de producto — Prospero Flow CRM',
+    description:
+      'Subida de archivos sin restricción (CWE-434) que deriva en Stored XSS (CWE-79) en el endpoint de guardado de productos de Prospero Flow CRM. La validación clasificaba el archivo únicamente por su contenido, pero el controlador construía el nombre almacenado a partir de la extensión declarada por el cliente, no de la ya validada por contenido. Esto permite subir un archivo con cabecera de imagen válida pero extensión .html declarada por el cliente, que el servidor web sirve como text/html sin requerir sesión. Cualquier usuario con permiso de creación de productos —el rol habitual de Seller, no uno administrativo— puede así ejecutar JavaScript arbitrario contra cualquier visitante que abra la URL de la foto, incluido un CompanyAdmin o SuperAdmin.',
+    cwe: 'CWE-434 + CWE-79 — Unrestricted Upload of File with Dangerous Type / Stored XSS',
+    severity: 'Medium',
+    cvss: '4.8',
+    cvssVector: 'CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:L/SA:N',
+    links: [
+      { label: 'CVE.org — Registro oficial', url: 'https://www.cve.org/CVERecord?id=CVE-2026-81931' },
+      { label: 'Secur0 CNA — Publicación', url: 'https://secur0.com/en/cna/cve-list/cve-2026-81931-unrestricted-upload-product-photo-extension-confusion-xss' },
+    ],
+  },
 ]
 
 // ── Bug Bounty ───────────────────────────────────────────────────────────
@@ -381,6 +395,7 @@ export const bugBounty = [
     cvss: 8.0,
     status: 'pending',
     date: '2026-08-10',
+    note: 'Asignado como CVE-2026-81931',
   },
   {
     id: 'must-change-password-api-bypass',
