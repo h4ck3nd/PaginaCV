@@ -8,6 +8,7 @@ const sevColor = {
   High: '#ff8a4c',
   Medium: '#ffc25c',
   Low: '#2be6a4',
+  Informative: '#94a3b8',
 }
 
 const PAGE_SIZE = 8
@@ -25,7 +26,9 @@ export default function BugBounty() {
   const sorted = useMemo(() => {
     const filtered = filter === 'All' ? bugBounty : bugBounty.filter((b) => b.severity === filter)
     return [...filtered].sort(
-      (a, b) => severityOrder.indexOf(a.severity) - severityOrder.indexOf(b.severity) || new Date(b.date) - new Date(a.date)
+      (a, b) =>
+        severityOrder.indexOf(a.severity) - severityOrder.indexOf(b.severity) ||
+        (b.date ? new Date(b.date).getTime() : 0) - (a.date ? new Date(a.date).getTime() : 0)
     )
   }, [filter])
 
@@ -107,6 +110,9 @@ export default function BugBounty() {
                     {b.program} · {b.type}
                     {b.note && <span className="text-signal-400"> · {b.note}</span>}
                   </p>
+                  {b.desc && (
+                    <p className="text-xs text-slate-400 mt-1.5 leading-relaxed max-w-3xl">{b.desc}</p>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
