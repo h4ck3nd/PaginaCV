@@ -260,7 +260,7 @@ export const bbPlatforms = [
   { name: 'Intigriti', username: 'd1se0', url: 'https://www.intigriti.com' },
 ]
 
-export const severityOrder = ['Critical', 'High', 'Medium', 'Low']
+export const severityOrder = ['Critical', 'High', 'Medium', 'Low', 'Informative']
 
 export const bugBounty = [
   {
@@ -414,28 +414,45 @@ export const bugBounty = [
     type: 'IDOR',
     severity: 'High',
     cvss: 8.1,
-    status: 'triaged',
+    status: 'accepted',
     date: '2026-08-13',
+    desc: 'El backend de la plataforma de eficiencia energética de Repsol (CAE) validaba la sesión del usuario pero no la titularidad del identificador de empresa solicitado, de modo que cualquier cuenta autenticada podía leer y sobrescribir el perfil completo de cualquier otra empresa inscrita: razón social, CIF, datos de contacto y plan de suscripción. Confirmado en ambos sentidos con cuentas de prueba.',
+    note: 'Report #YWH-PGM5837-468 · Aceptado · en colaboración con elpinguinodemario',
   },
   {
     id: 'repsol-gigya-uid-account-disclosure',
     title: 'Divulgación de cuenta de usuario sin autenticación (Gigya)',
     program: 'Repsol Bug Bounty (YesWeHack)',
-    type: 'Information Disclosure',
+    type: 'IDOR',
     severity: 'High',
     cvss: 7.5,
-    status: 'triaged',
+    status: 'duplicate',
     date: '2026-08-14',
+    note: 'Report #YWH-PGM5837-475 · Duplicado (mismo patrón que hallazgo aceptado en openroom.fundacionrepsol.com)',
+  },
+  {
+    id: 'repsol-chemicalsonline-apex-idor',
+    title: 'IDOR sin autenticación en comunidad Salesforce — manipulación de cuentas de cliente',
+    program: 'Repsol Bug Bounty (YesWeHack)',
+    type: 'IDOR',
+    severity: 'High',
+    cvss: 7.5,
+    status: 'duplicate',
+    date: '2026-10-22',
+    desc: 'En una comunidad de Salesforce Experience Cloud de Repsol, el perfil de usuario invitado podía ejecutar controladores Apex del área autenticada de facturación y pedidos. Los métodos tomaban el identificador de cliente directamente de los parámetros de la petición sin comprobar la sesión, permitiendo leer y manipular información de cuenta de otros clientes desde cualquier visitante no autenticado.',
+    note: 'Report #YWH-PGM5837-770 · Duplicado',
   },
   {
     id: 'ganaenergia-hardcoded-jwt-cups-exposure',
-    title: 'JWT hardcodeado en APK pública expone datos de contrato',
+    title: 'JWT de servicio hardcodeado en la app de Gana Energía (Android) — consultas por CUPS arbitrario',
     program: 'Repsol Bug Bounty (YesWeHack)',
-    type: 'Hardcoded Credentials',
-    severity: 'High',
-    cvss: 7.5,
-    status: 'triaged',
+    type: 'Hard-coded Credentials',
+    severity: 'Medium',
+    cvss: 5.3,
+    status: 'accepted',
     date: '2026-08-14',
+    desc: 'El bundle JavaScript de la app oficial de Gana Energía para Android incluye un JWT embebido como credencial de servicio: idéntico en todas las instalaciones, sin fecha de expiración y con un identificador genérico en lugar de un usuario. Con él, el backend de recomendaciones energéticas responde a búsquedas por CUPS sin verificar la titularidad del contrato, de modo que cualquiera que extraiga la credencial del APK público puede consultar cualquier código CUPS.',
+    note: 'Report #YWH-PGM5837-476 · Aceptado · en colaboración con elpinguinodemario',
   },
   {
     id: 'race-condition-multiple-purchase',
@@ -528,6 +545,38 @@ export const bugBounty = [
     date: '2026-04-14',
   },
   {
+    id: 'demorgen-actuator-exposure',
+    title: 'Endpoints de Spring Boot Actuator expuestos sin autenticación',
+    program: 'DPG Media — De Morgen (YesWeHack)',
+    type: 'Information Disclosure',
+    severity: 'Medium',
+    cvss: 5.3,
+    status: 'outofscope',
+    date: '2026-10-06',
+    desc: 'Endpoints de diagnóstico de producción (Spring Boot Actuator) expuestos sin autenticación en el frontend de De Morgen, con fuga de información sobre infraestructura y configuración interna. Reportado y cerrado por el programa como fuera de alcance.',
+    note: 'Report #DPGM-NQOKZTAR · Cerrado / fuera de alcance',
+  },
+  {
+    id: 'pia-vpn-daemon-socket-idac',
+    title: 'Improper Access Control en socket de control del daemon de una app VPN → escalada de privilegios local',
+    program: 'YesWeHack — Programa privado',
+    type: 'Broken Access Control / Privilege Escalation',
+    severity: 'Informative',
+    cvss: 0.0,
+    status: 'informative',
+    desc: 'El socket de control del daemon de una aplicación VPN aceptaba instrucciones sobre su camino de ejecución desde procesos no privilegiados, lo que permite a un usuario local del equipo escalar privilegios. Clasificado como informativo por el programa.',
+  },
+  {
+    id: 'dailymotion-user-endpoints-idor',
+    title: 'IDOR en endpoints públicos de usuario de la API (web y partner)',
+    program: 'Dailymotion (YesWeHack)',
+    type: 'IDOR',
+    severity: 'Informative',
+    cvss: 0.0,
+    status: 'informative',
+    desc: 'Referencias a objetos inseguras en endpoints públicos de usuario de la API de Dailymotion (web y partner), que permitían obtener información de cuentas de forma no prevista. Clasificado como informativo por el programa.',
+  },
+  {
     id: 'example-bug',
     title: 'SQL Injection en panel de autenticación',
     program: 'Programa privado',
@@ -544,6 +593,9 @@ export const statusMeta = {
   accepted: { label: 'Aceptado', color: '#5fd0ff' },
   triaged: { label: 'Triado', color: '#ffc25c' },
   pending: { label: 'Pendiente', color: '#94a3b8' },
+  duplicate: { label: 'Duplicado', color: '#a78bfa' },
+  informative: { label: 'Informativo', color: '#818cf8' },
+  outofscope: { label: 'Fuera de alcance', color: '#f87171' },
 }
 
 // ── HackTheBox ───────────────────────────────────────────────────────────
