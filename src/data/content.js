@@ -409,6 +409,7 @@ export const bugBounty = [
   },
   {
     id: 'repsol-soscae-idor-companies',
+    featured: true,
     title: 'IDOR de lectura/escritura cross-tenant en plataforma CAE',
     program: 'Repsol Bug Bounty (YesWeHack)',
     type: 'IDOR',
@@ -421,6 +422,7 @@ export const bugBounty = [
   },
   {
     id: 'repsol-gigya-uid-account-disclosure',
+    featured: true,
     title: 'Divulgación de cuenta de usuario sin autenticación (Gigya)',
     program: 'Repsol Bug Bounty (YesWeHack)',
     type: 'IDOR',
@@ -432,6 +434,7 @@ export const bugBounty = [
   },
   {
     id: 'repsol-chemicalsonline-apex-idor',
+    featured: true,
     title: 'IDOR sin autenticación en comunidad Salesforce — manipulación de cuentas de cliente',
     program: 'Repsol Bug Bounty (YesWeHack)',
     type: 'IDOR',
@@ -444,6 +447,7 @@ export const bugBounty = [
   },
   {
     id: 'ganaenergia-hardcoded-jwt-cups-exposure',
+    featured: true,
     title: 'JWT de servicio hardcodeado en la app de Gana Energía (Android) — consultas por CUPS arbitrario',
     program: 'Repsol Bug Bounty (YesWeHack)',
     type: 'Hard-coded Credentials',
